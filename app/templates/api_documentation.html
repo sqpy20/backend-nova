@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        .header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section h2 {
+            margin-top: 0;
+        }
+
+        .route {
+            margin-bottom: 10px;
+        }
+
+        .route h3 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .route pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-left: 5px solid #333;
+            white-space: pre-wrap;
+        }
+
+        .route .request,
+        .route .response {
+            margin: 10px 0;
+        }
+
+        .route .request p,
+        .route .response p {
+            margin: 5px 0;
+        }
+
+        .route .request {
+            border-left: 3px solid #007bff;
+            padding-left: 10px;
+        }
+
+        .route .response {
+            border-left: 3px solid #28a745;
+            padding-left: 10px;
+        }
+
+        .code {
+            background: #272822;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>API Documentation</h1>
+    </div>
+    <div class="container">
+        <div class="section">
+            <h2>Student Routes</h2>
+
+            <div class="route">
+                <h3>Student Registration</h3>
+                <pre>POST /api/student/register</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Content-Type: application/json or application/x-www-form-urlencoded</p>
+                    <div class="code">
+                        {
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "username": "johndoe",
+                        "email": "john.doe@example.com",
+                        "password": "securepassword"
+                        }
+                    </div>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "message": "User registered successfully",
+                        "user": {
+                        "id": "user-id",
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "username": "johndoe",
+                        "email": "john.doe@example.com",
+                        "access_token": "access-token"
+                        }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Student Login</h3>
+                <pre>POST /api/student/login</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Content-Type: application/json</p>
+                    <div class="code">
+                        {
+                        "email": "john.doe@example.com",
+                        "password": "securepassword"
+                        }
+                    </div>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "access_token": "access-token",
+                        "user": {
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "username": "johndoe",
+                        "email": "john.doe@example.com"
+                        }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Submit Student Data</h3>
+                <pre>POST /api/student/data</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                    <div class="code">
+                        {
+                        "course_name": "Mathematics",
+                        "course_code": "MATH101",
+                        "course_unit": 3,
+                        "test_score": 80,
+                        "exam_score": 90
+                        }
+                    </div>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "message": "Student data submitted successfully"
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Fetch All Student Data</h3>
+                <pre>GET /api/student/datas</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        [
+                        {
+                        "course_name": "Mathematics",
+                        "course_code": "MATH101",
+                        "course_unit": 3,
+                        "test_score": 80,
+                        "exam_score": 90,
+                        "student_id": "student-id",
+                        "id": "data-id"
+                        }
+                        ]
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Create Student Prediction</h3>
+                <pre>POST /api/student/create/prediction</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                    <div class="code">
+                        {
+                        "course_name": "Mathematics"
+                        }
+                    </div>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "message": "Prediction made successfully",
+                        "access_token": "access-token",
+                        "stored_prediction": {
+                        "course_name": "Mathematics",
+                        "decision_tree_pred_class": 1,
+                        "decision_tree_pred_prob": [0.3, 0.7],
+                        "id": "prediction-id",
+                        "linear_regression_pred": 85.5,
+                        "risk_factor": "low",
+                        "student_data_id": "data-id"
+                        }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Get Student Predictions</h3>
+                <pre>GET /api/student/predictions</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "user_id": "user-id",
+                        "predictions": [
+                        {
+                        "course_name": "Mathematics",
+                        "decision_tree_pred_class": 1,
+                        "decision_tree_pred_prob": [0.3, 0.7],
+                        "id": "prediction-id",
+                        "linear_regression_pred": 85.5,
+                        "risk_factor": "low",
+                        "student_data_id": "data-id"
+                        }
+                        ]
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Get Specific Student Prediction for a Specific Course</h3>
+                <pre>GET /api/student/predictions/&lt;string:course_name&gt;</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "user_id": "user-id",
+                        "predictions": [
+                        {
+                        "course_name": "Mathematics",
+                        "decision_tree_pred_class": 1,
+                        "decision_tree_pred_prob": [0.3, 0.7],
+                        "id": "prediction-id",
+                        "linear_regression_pred": 85.5,
+                        "risk_factor": "low",
+                        "student_data_id": "data-id"
+                        }
+                        ]
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Admin Routes</h2>
+
+            <div class="route">
+                <h3>Admin Registration</h3>
+                <pre>POST /api/admin/register</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Content-Type: application/json or application/x-www-form-urlencoded</p>
+                    <div class="code">
+                        {
+                        "admin_name": "Jane",
+                        "username": "adminjane",
+                        "email": "jane.admin@example.com",
+                        "password": "securepassword"
+                        }
+                    </div>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "message": "User registered successfully",
+                        "user": {
+                        "id": "user-id",
+                        "admin_name": "Jane",
+                        "username": "adminjane",
+                        "email": "jane.admin@example.com",
+                        "access_token": "access-token"
+                        }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Admin Login</h3>
+                <pre>POST /api/admin/login</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Content-Type: application/json</p>
+                    <div class="code">
+                        {
+                        "email": "jane.admin@example.com",
+                        "password": "securepassword"
+                        }
+                    </div>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "access_token": "access-token",
+                        "user": {
+                        "admin_name": "Jane",
+                        "username": "adminjane",
+                        "email": "jane.admin@example.com"
+                        }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Get All Students</h3>
+                <pre>GET /api/admin/students</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        [
+                        {
+                        "id": "student-id",
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "username": "johndoe",
+                        "email": "john.doe@example.com"
+                        }
+                        ]
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Get Student by ID</h3>
+                <pre>GET /api/admin/student/&lt;string:id&gt;</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "student_data": {
+                        "id": "student-id",
+                        "first_name": "John",
+                        "last_name": "Doe",
+                        "username": "johndoe",
+                        "email": "john.doe@example.com"
+                        },
+                        "data": [
+                        {
+                        "course_name": "Mathematics",
+                        "course_code": "MATH101",
+                        "course_unit": 3,
+                        "test_score": 80,
+                        "exam_score": 90,
+                        "student_id": "student-id",
+                        "id": "data-id"
+                        }
+                        ]
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Get Student Predictions by Admin</h3>
+                <pre>GET /api/admin/student/&lt;string:id&gt;/predictions</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "user_id": "user-id",
+                        "predictions": [
+                        {
+                        "course_name": "Mathematics",
+                        "decision_tree_pred_class": 1,
+                        "decision_tree_pred_prob": [0.3, 0.7],
+                        "id": "prediction-id",
+                        "linear_regression_pred": 85.5,
+                        "risk_factor": "low",
+                        "student_data_id": "data-id"
+                        }
+                        ]
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="route">
+                <h3>Get Student Predictions for Specific Course by Admin</h3>
+                <pre>GET /api/admin/student/&lt;string:id&gt;/predictions/&lt;string:course_name&gt;</pre>
+                <div class="request">
+                    <p><strong>Request:</strong></p>
+                    <p>Authorization: Bearer access-token</p>
+                </div>
+                <div class="response">
+                    <p><strong>Response:</strong></p>
+                    <div class="code">
+                        {
+                        "user_id": "user-id",
+                        "predictions": [
+                        {
+                        "course_name": "Mathematics",
+                        "decision_tree_pred_class": 1,
+                        "decision_tree_pred_prob": [0.3, 0.7],
+                        "id": "prediction-id",
+                        "linear_regression_pred": 85.5,
+                        "risk_factor": "low",
+                        "student_data_id": "data-id"
+                        }
+                        ]
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
